@@ -7,20 +7,38 @@
 char **reconstruct_trip(Ticket **tickets, int length)
 {
   HashTable *ht = create_hash_table(length);
-  char **route = malloc(length * sizeof(char *));
+  char **route = malloc(length * sizeof(char *)); // Malloc is used to allocate a block of memory on the heap. 
+  // The program accesses this block of memory via a pointer that malloc returns. 
 
   /* YOUR CODE HERE */
+  for (int i = 0; i < length; i++) { // Put everything into hash table
+    hash_table_insert(ht, tickets[i]->source, tickets[i]->destination);
+    // `source` string represents the starting airport
+    // `destination` string represents the next airport
+  }
 
+  char *place = hash_table_retrieve(ht, "NONE");
+  route[0] = place; // The first in route is assigned the value "NONE"
+
+  for (int i = 1; i < length; i++) // A for loop to pass through and get tickets
+  {
+    place = hash_table_retrieve(ht, place);
+    route[i] = place;
+  }
+
+  destroy_hash_table(ht); // Free ht
   return route;
 }
+
 
 void print_route(char **route, int length)
 {
   for (int i = 0; i < length; i++) {
-    printf("%s\n", route[i]);
+    printf("\n");
+    printf("Route: %s\n", route[i]);
+    printf("\n");
   }
 }
-
 
 
 #ifndef TESTING
@@ -43,6 +61,7 @@ int main(void)
   ticket_3->source = "DCA";
   ticket_3->destination = "NONE";
   tickets[2] = ticket_3;
+
 
   print_route(reconstruct_trip(tickets, 3), 3); // PDX, DCA, NONE
 
