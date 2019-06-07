@@ -1,4 +1,4 @@
-# Sprint Challenge: Theory of Computation and Hash Tables
+# Sprint Challenge: Theory of Computation and Hash Tables hi
 
 This challenge allows you to practice the concepts and techniques learned over the past week and apply them in a concrete project. This Sprint, we explored the history and theory of computation, diving deep into memory and pointers by building array functions and hash tables. In your challenge this week, you will demonstrate proficiency by filling out boolean truth tables and solving algorithms in C using hash tables.
 
